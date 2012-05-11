@@ -110,7 +110,7 @@ Get the count of values in this series.
 has 'values' => (
     traits => [ 'Array' ],
     is => 'rw',
-    isa => 'ArrayRef[Num]',
+    isa => 'ArrayRef',
     default => sub { [] },
     handles => {
         'add_to_values' => 'push',
@@ -127,7 +127,7 @@ sub _build_range {
         unless scalar(@{ $values });
 
     return Chart::Clicker::Data::Range->new(
-        lower => min(@{ $values }), upper => max(@{ $values})
+        lower => min(grep { defined } @{ $values }), upper => max(grep { defined } @{ $values})
     );
 }
 

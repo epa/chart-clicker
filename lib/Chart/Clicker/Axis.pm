@@ -508,6 +508,7 @@ Given a span and a value, returns it's pixel position on this Axis.
 
 sub mark {
     my ($self, $span, $value) = @_;
+    return undef if not defined $value;
 
     if($self->has_skip_range) {
         # We must completely ignore values that fall inside the skip range,
